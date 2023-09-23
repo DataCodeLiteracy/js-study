@@ -13,13 +13,13 @@ function renderProduct(product) {
 
 document.querySelector('#selector')?.addEventListener('change', handleChange)
 
-async function fetchProduct(id) {
-  const res = await fetch(`https://api.escuelajs.co/api/v1/products/${id}`)
-  const json = await res.json()
-  return json
-}
+const fetchProduct = async (id) =>
+  fetch(`https://api.escuelajs.co/api/v1/products/${id}`).then((res) =>
+    res.json()
+  )
 
-async function getProduct(id) {
+const getProduct = (id) => {
+  //  (...)사전 준비 코드 생략
   const json = fetchProduct(id)
   return json
 }
@@ -30,3 +30,6 @@ async function handleChange(e) {
 
   renderProduct(product)
 }
+
+// 중간 과정에서는 async / await가 없어도 무방하다.
+// 간단하게 then으로 처리할 수 있는 경우에도 없애도 된다.
