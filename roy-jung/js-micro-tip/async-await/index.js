@@ -13,10 +13,9 @@ function renderProduct(product) {
 
 document.querySelector('#selector')?.addEventListener('change', handleChange)
 
+const fetchJson = (url) => fetch(url).then((res) => res.json())
 const fetchProduct = async (id) =>
-  fetch(`https://api.escuelajs.co/api/v1/products/${id}`).then((res) =>
-    res.json()
-  )
+  fetchJson(`https://api.escuelajs.co/api/v1/products/${id}`)
 
 const getProduct = (id) => {
   //  (...)사전 준비 코드 생략
@@ -24,7 +23,7 @@ const getProduct = (id) => {
   return json
 }
 
-async function handleChange(e) {
+const handleChange = async (e) => {
   const id = e.target.value
   const product = await getProduct(id)
 
