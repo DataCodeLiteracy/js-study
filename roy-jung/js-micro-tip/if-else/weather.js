@@ -8,12 +8,21 @@
 */
 
 const getWeather = (temperature) => {
-  if (temperature < 0) return '몹시 추워요'
-  if (temperature < 10) return '추워요'
-  if (temperature < 20) return '선선해요'
-  if (temperature < 30) return '조금 더워요'
-  if (temperature < 40) return '더워요'
-  return '몹시 더워요'
+  const shiftedTemperature = Math.floor(temperature / 10)
+  switch (shiftedTemperature) {
+    case 0:
+      return '추워요'
+    case 1:
+      return '선선해요'
+    case 2:
+      return '조금 더워요'
+    case 3:
+      return '더워요'
+    default: {
+      if (shiftedTemperature < 0) return '몹시 추워요'
+      return '몹시 더워요'
+    }
+  }
 }
 
 console.log(getWeather(-15))
