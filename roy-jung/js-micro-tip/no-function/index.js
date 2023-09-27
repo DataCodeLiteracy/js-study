@@ -1,13 +1,17 @@
-// 일반 함수
-function foo(...args) {
-  console.log(args)
+// 객체 메서드
+const obj1 = {
+  name: '종현',
+  method: function () {
+    console.log(this.name)
+  }
 }
 
-// 화살표 함수
-
-const bar = (...args) => {
-  console.log(args)
+const obj2 = {
+  name: '한결',
+  method() {
+    console.log(this.name)
+  }
 }
 
-console.dir(foo)
-console.dir(bar)
+console.dir(obj1.method)
+console.dir(obj2.method)
