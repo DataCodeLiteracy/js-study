@@ -18,24 +18,24 @@ const googleLogin = (id) => {
   return '구글'
 }
 
-const socialLogin = (where, id) => {
-  let domain
+const executeLogin = (where, id) => {
   switch (where) {
     case 'naver':
-      domain = naverLogin(id)
+      return naverLogin(id)
       break
     case 'kakao':
-      domain = kakaoLogin(id)
-      break
+      return kakaoLogin(id)
     case 'facebook':
-      domain = facebookLogin(id)
-      break
+      return facebookLogin(id)
     case 'google':
-      domain = googleLogin(id)
-      break
+      return googleLogin(id)
     default:
       return
   }
+}
+
+const socialLogin = (where, id) => {
+  const domain = executeLogin(where, id)
   return `${domain} ${id}`
 }
 
