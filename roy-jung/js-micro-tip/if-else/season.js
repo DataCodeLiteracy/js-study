@@ -6,7 +6,7 @@
 */
 
 const getSeason = (month) => {
-  const shiftedMonth = month - 3
+  const shiftedMonth = (month - 3 + 12) % 12
   switch (shiftedMonth) {
     case 0:
     case 1:
@@ -21,8 +21,8 @@ const getSeason = (month) => {
     case 8:
       return '가을'
     case 9:
-    case -2:
-    case -1:
+    case 10:
+    case 11:
       return '겨울'
     default:
       return
