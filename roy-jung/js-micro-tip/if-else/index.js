@@ -20,14 +20,21 @@ const googleLogin = (id) => {
 
 const socialLogin = (where, id) => {
   let domain
-  if (where === 'naver') {
-    domain = naverLogin(id)
-  } else if (where === 'kakao') {
-    domain = kakaoLogin(id)
-  } else if (where === 'facebook') {
-    domain = facebookLogin(id)
-  } else if (where === 'google') {
-    domain = googleLogin(id)
+  switch (where) {
+    case 'naver':
+      domain = naverLogin(id)
+      break
+    case 'kakao':
+      domain = kakaoLogin(id)
+      break
+    case 'facebook':
+      domain = facebookLogin(id)
+      break
+    case 'google':
+      domain = googleLogin(id)
+      break
+    default:
+      return
   }
   return `${domain} ${id}`
 }
