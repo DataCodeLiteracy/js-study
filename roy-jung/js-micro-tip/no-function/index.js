@@ -1,17 +1,17 @@
-// 객체 메서드
-const obj1 = {
-  name: '종현',
-  method: function () {
-    console.log(this.name)
-  }
+// generator
+function* generator() {
+  yield 1
+  yield 2
 }
 
-const obj2 = {
-  name: '한결',
-  method() {
-    console.log(this.name)
+const obj = {
+  val: [1, 2],
+  *gene() {
+    yield this.val.shift()
+    yield this.val.shift()
   }
 }
-
-console.dir(obj1.method)
-console.dir(obj2.method)
+const gene = obj.gene()
+console.log(gene.next().value) // 1
+console.log(gene.next().value) // 2
+console.log(gene.next().value) // undefined
