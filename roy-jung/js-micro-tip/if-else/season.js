@@ -6,23 +6,15 @@
 */
 
 const getSeason = (month) => {
-  const shiftedMonth = (month - 3 + 12) % 12
+  const shiftedMonth = Math.floor(((month + 9) % 12) / 3)
   switch (shiftedMonth) {
     case 0:
-    case 1:
-    case 2:
       return '봄'
-    case 3:
-    case 4:
-    case 5:
+    case 1:
       return '여름'
-    case 6:
-    case 7:
-    case 8:
+    case 2:
       return '가을'
-    case 9:
-    case 10:
-    case 11:
+    case 3:
       return '겨울'
     default:
       return
