@@ -6,10 +6,26 @@
 */
 
 const getSeason = (month) => {
-  if (month >= 3 && month <= 5) return '봄'
-  if (month >= 6 && month <= 8) return '여름'
-  if (month >= 9 && month <= 11) return '가을'
-  if (month >= 12 || month <= 2) return '겨울'
+  switch (month) {
+    case 3:
+    case 4:
+    case 5:
+      return '봄'
+    case 6:
+    case 7:
+    case 8:
+      return '여름'
+    case 9:
+    case 10:
+    case 11:
+      return '가을'
+    case 12:
+    case 1:
+    case 2:
+      return '겨울'
+    default:
+      return
+  }
 }
 
 console.log(getSeason(2))
