@@ -7,9 +7,19 @@
   - 40 이상 : 몹시 더워요
 */
 
+/*
+  0 미만은 모두 -1로 수렴하도록 강제: `Math.max(val, -1)`
+  4 이상은 모두 4로 수렴하도록 강제: `Math.min(val, 4)`
+*/
+
 const getWeather = (temperature) => {
-  const shiftedTemperature = Math.floor(temperature / 10)
+  const shiftedTemperature = Math.min(
+    Math.max(Math.floor(temperature / 10), -1),
+    4
+  )
   switch (shiftedTemperature) {
+    case -1:
+      return '몹시 추워요'
     case 0:
       return '추워요'
     case 1:
@@ -18,10 +28,8 @@ const getWeather = (temperature) => {
       return '조금 더워요'
     case 3:
       return '더워요'
-    default: {
-      if (shiftedTemperature < 0) return '몹시 추워요'
+    case 4:
       return '몹시 더워요'
-    }
   }
 }
 
