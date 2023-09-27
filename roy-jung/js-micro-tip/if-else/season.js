@@ -5,20 +5,16 @@
   - 12월 ~ 2월 : 겨울
 */
 
+const SeasonMap = {
+  0: '봄',
+  1: '여름',
+  2: '가을',
+  3: '겨울'
+}
+
 const getSeason = (month) => {
   const shiftedMonth = Math.floor(((month + 9) % 12) / 3)
-  switch (shiftedMonth) {
-    case 0:
-      return '봄'
-    case 1:
-      return '여름'
-    case 2:
-      return '가을'
-    case 3:
-      return '겨울'
-    default:
-      return
-  }
+  return SeasonMap[shiftedMonth]
 }
 
 console.log(getSeason(2))
