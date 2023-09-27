@@ -1,24 +1,35 @@
+// 생성자 함수로 사용
 function Foo(...args) {
-  console.log(this)
   if (this !== window) this.args = args
   else return args
 }
+Foo.prototype.getArgs = function () {
+  return this.args
+}
 
-// 일반 함수로 사용 -> 프로토타입 프로퍼티가 불필요
-// console.log(Foo(2, 3))
-// -> this 바인딩은 함수로 쓸 때는 불필요한 정보
+const foo = new Foo(1, 2)
 
-// 생성자 함수로 사용
-// const foo = new Foo(2, 3)
-// console.log(foo)
+for (let prop in foo) {
+  if (foo.hasOwnProperty(prop)) console.log(prop)
+}
 
-// 객체 메서드로 할당 -> this를 바인딩
-// const bar = {
-//   method: Foo
-// }
+// console.dir(foo)
 
-// bar.method(2, 3)
-// console.log(bar)
+class Bar {
+  constructor(...args) {
+    if (this !== window) this.args = args
+    else return args
+  }
 
-function a() {}
-console.dir(a)
+  getArgs() {
+    return this.args
+  }
+}
+
+const bar = new Bar(3, 4)
+
+for (let prop in bar) {
+  console.log(prop)
+}
+
+// console.dir(bar)
