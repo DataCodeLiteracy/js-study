@@ -16,21 +16,21 @@ const store = (() => {
 const initialState = { todos: [] }
 
 const reducerMap = {
-  addTodo: (state, action) => ({
+  addTodo: (state, { data }) => ({
     ...state,
-    todos: [action.data, ...state.todos]
+    todos: [data, ...state.todos]
   }),
-  updateTodo: (state, action) => {
+  updateTodo: (state, { targetIndex, data }) => {
     const newTodos = [...state.todos]
-    newTodos.splice(action.targetIndex, 1, action.data)
+    newTodos.splice(targetIndex, 1, data)
     return {
       ...state,
       todos: newTodos
     }
   },
-  removeTodo: (state, action) => {
+  removeTodo: (state, { targetIndex }) => {
     const newTodos = [...state.todos]
-    newTodos.splice(action.targetIndex, 1)
+    newTodos.splice(targetIndex, 1)
     return {
       ...state,
       todos: newTodos
@@ -38,9 +38,8 @@ const reducerMap = {
   }
 }
 
-const reducer = (state = initialState, action) => {
-  return reducerMap[action.type]?.(state, action) || state
-}
+const reducer = (state = initialState, action) =>
+  reducerMap[action.type]?.(state, action) || state
 
 store.dispatch({ type: 'addTodo', data: 'new1' })
 console.log(store.getState())
