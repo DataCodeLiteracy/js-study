@@ -1,0 +1,46 @@
+html {
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  background-color: black;
+}
+
+h1 {
+  color: white;
+}
+
+ul {
+  list-style: none;
+  border: 1px solid gray;
+  width: 500px;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  font-size: 17px;
+  color: white;
+}
+
+.shortcut {
+  border: 1px solid gray;
+  width: 25%;
+  padding: 5px;
+  text-align: center;
+}
+
+.description {
+  border: 1px solid gray;
+  width: 75%;
+  padding: 7px;
+}
+
+.selected {
+  background-color: rgba(50, 50, 213, 0.474);
+}
+
+.current {
+  background-color: rgba(0, 255, 255, 0.458);
+}
