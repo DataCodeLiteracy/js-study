@@ -12,26 +12,18 @@
   4 이상은 모두 4로 수렴하도록 강제: `Math.min(val, 4)`
 */
 
-const getWeather = (temperature) => {
-  const shiftedTemperature = Math.min(
-    Math.max(Math.floor(temperature / 10), -1),
-    4
-  )
-  switch (shiftedTemperature) {
-    case -1:
-      return '몹시 추워요'
-    case 0:
-      return '추워요'
-    case 1:
-      return '선선해요'
-    case 2:
-      return '조금 더워요'
-    case 3:
-      return '더워요'
-    case 4:
-      return '몹시 더워요'
-  }
-}
+const Temperatures = [
+  '몹시 추워요',
+  '추워요',
+  '선선해요',
+  '조금 더워요',
+  '더워요',
+  '몹시 더워요'
+]
+
+const getTemperature = (temperature) =>
+  Math.min(Math.max(Math.ceil(temperature / 10), 0), 5)
+const getWeather = (temperature) => Temperatures[getTemperature(temperature)]
 
 console.log(getWeather(-15))
 console.log(getWeather(5))
