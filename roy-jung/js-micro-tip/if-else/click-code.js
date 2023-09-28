@@ -16,18 +16,8 @@ const clickCodes = {
   }
 }
 
-const getClickCode = (page, keyword) => {
-  let code
-  if (page === 'city') {
-    code = clickCodes.city[keyword]
-  } else if (page === 'country') {
-    code = clickCodes.country[keyword]
-  } else if (page === 'sight') {
-    code = clickCodes.sight[keyword]
-  }
-  return code
-}
+const getClickCode = (page, keyword) => clickCodes[page]?.[keyword]
 
 console.log(getClickCode('city', 'tab')) // cib
 console.log(getClickCode('country', 'title')) // cot
-console.log(getClickCode('sight', 'more')) // sim
+console.log(getClickCode('sightㅅ', 'more')) // sim
