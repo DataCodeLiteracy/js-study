@@ -1,29 +1,29 @@
-const cityCodes = {
-  title: 'cit',
-  more: 'cim',
-  tab: 'cib'
-}
-
-const countryCodes = {
-  title: 'cot',
-  more: 'com',
-  tab: 'cob'
-}
-
-const sightCodes = {
-  title: 'sit',
-  more: 'sim',
-  tab: 'sib'
+const clickCodes = {
+  city: {
+    title: 'cit',
+    more: 'cim',
+    tab: 'cib'
+  },
+  country: {
+    title: 'cot',
+    more: 'com',
+    tab: 'cob'
+  },
+  sight: {
+    title: 'sit',
+    more: 'sim',
+    tab: 'sib'
+  }
 }
 
 const getClickCode = (page, keyword) => {
   let code
   if (page === 'city') {
-    code = cityCodes[keyword]
+    code = clickCodes.city[keyword]
   } else if (page === 'country') {
-    code = countryCodes[keyword]
+    code = clickCodes.country[keyword]
   } else if (page === 'sight') {
-    code = sightCodes[keyword]
+    code = clickCodes.sight[keyword]
   }
   return code
 }
