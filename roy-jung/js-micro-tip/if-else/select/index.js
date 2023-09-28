@@ -22,39 +22,35 @@ const move = (to) => {
 
 let cursors = [0, 0]
 
-const handleKeyDown = (e) => {
-  if (e.code !== 'ArrowUp' && e.code !== 'ArrowDown') return
-  let selected = [0]
-
-  if (e.code === 'ArrowUp') {
-    if (e.altKey) {
-      if (e.shiftKey) {
-        selected = select(cursors[1], cursors[0] - 5)
-      } else {
-        selected = move(cursors[0] - 5)
-      }
-    } else {
-      if (e.shiftKey) {
-        selected = select(cursors[1], cursors[0] - 1)
-      } else {
-        selected = move(cursors[0] - 1)
-      }
+const keyMap = {
+  ArrowUp: {
+    alt: {
+      shift: () => select(cursors[1], cursors[0] - 5),
+      noShift: () => move(cursors[0] - 5)
+    },
+    noAlt: {
+      shift: () => select(cursors[1], cursors[0] - 1),
+      noShift: () => move(cursors[0] - 1)
     }
-  } else if (e.code === 'ArrowDown') {
-    if (e.altKey) {
-      if (e.shiftKey) {
-        selected = select(cursors[1], cursors[0] + 5)
-      } else {
-        selected = move(cursors[0] + 5)
-      }
-    } else {
-      if (e.shiftKey) {
-        selected = select(cursors[1], cursors[0] + 1)
-      } else {
-        selected = move(cursors[0] + 1)
-      }
+  },
+  ArrowDown: {
+    alt: {
+      shift: () => select(cursors[1], cursors[0] + 5),
+      noShift: () => move(cursors[0] + 5)
+    },
+    noAlt: {
+      shift: () => select(cursors[1], cursors[0] + 1),
+      noShift: () => move(cursors[0] + 1)
     }
   }
+}
+
+const handleKeyDown = (e) => {
+  if (e.code !== 'ArrowUp' && e.code !== 'ArrowDown') return
+  const selected =
+    keyMap[e.code][e.altKey ? 'alt' : 'noAlt'][
+      e.shiftKey ? 'shift' : 'noShift'
+    ]()
 
   list.forEach((item, i) => {
     item.classList.toggle('current', i === cursors[0])
