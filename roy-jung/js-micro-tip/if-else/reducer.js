@@ -16,21 +16,20 @@ const store = (() => {
 const initialState = { todos: [] }
 
 const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'addTodo':
-      return {
-        ...state,
-        todos: [action.data, ...state.todos]
-      }
-    case 'updateTodo': {
+  const reducerMap = {
+    addTodo: () => ({
+      ...state,
+      todos: [action.data, ...state.todos]
+    }),
+    updateTodo: () => {
       const newTodos = [...state.todos]
       newTodos.splice(action.targetIndex, 1, action.data)
       return {
         ...state,
         todos: newTodos
       }
-    }
-    case 'removeTodo': {
+    },
+    removeTodo: () => {
       const newTodos = [...state.todos]
       newTodos.splice(action.targetIndex, 1)
       return {
@@ -38,9 +37,8 @@ const reducer = (state = initialState, action) => {
         todos: newTodos
       }
     }
-    default:
-      return state
   }
+  return reducerMap[action.type]?.() || state
 }
 
 store.dispatch({ type: 'addTodo', data: 'new1' })
