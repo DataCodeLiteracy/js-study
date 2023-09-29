@@ -23,34 +23,26 @@ const move = (to) => {
 let cursors = [0, 0]
 
 const keyMap = {
-  U: {
-    A: {
-      S: () => select(cursors[1], cursors[0] - 5),
-      s: () => move(cursors[0] - 5)
-    },
-    a: {
-      S: () => select(cursors[1], cursors[0] - 1),
-      s: () => move(cursors[0] - 1)
-    }
-  },
-  D: {
-    A: {
-      S: () => select(cursors[1], cursors[0] + 5),
-      s: () => move(cursors[0] + 5)
-    },
-    a: {
-      S: () => select(cursors[1], cursors[0] + 1),
-      s: () => move(cursors[0] + 1)
-    }
-  }
+  SAU: () => select(cursors[1], cursors[0] - 5),
+  sAU: () => move(cursors[0] - 5),
+
+  SaU: () => select(cursors[1], cursors[0] - 1),
+  saU: () => move(cursors[0] - 1),
+
+  SAD: () => select(cursors[1], cursors[0] + 5),
+  sAD: () => move(cursors[0] + 5),
+
+  SaD: () => select(cursors[1], cursors[0] + 1),
+  saD: () => move(cursors[0] + 1)
 }
 
 const handleKeyDown = (e) => {
   if (e.code !== 'ArrowUp' && e.code !== 'ArrowDown') return
-  const selected =
-    keyMap[e.code][e.altKey ? 'alt' : 'noAlt'][
-      e.shiftKey ? 'shift' : 'noShift'
-    ]()
+  const shift = e.shiftKey ? 'S' : 's'
+  const alt = e.altKey ? 'A' : 'a'
+  const arrow = e.code === 'ArrowUp' ? 'U' : 'D'
+  const key = [shift, alt, arrow].join('')
+  const selected = keyMap[key]()
 
   list.forEach((item, i) => {
     item.classList.toggle('current', i === cursors[0])
