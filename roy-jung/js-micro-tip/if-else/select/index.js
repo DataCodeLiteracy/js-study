@@ -14,7 +14,7 @@ const select = (from, to) => {
   return Array.from({ length: max - min + 1 }, (_, i) => i + min)
 }
 
-const move = (to) => {
+const move = (from, to) => {
   const target = getBoundValue(to)
   cursors = [target, target]
   return [target]
@@ -24,33 +24,19 @@ let cursors = [0, 0]
 
 const keyMap = {
   ArrowUp: {
-    alt: {
-      shift: () => select(cursors[1], cursors[0] - 5),
-      noShift: () => move(cursors[0] - 5)
-    },
-    noAlt: {
-      shift: () => select(cursors[1], cursors[0] - 1),
-      noShift: () => move(cursors[0] - 1)
-    }
+    alt: () => [cursors[1], cursors[0] - 5],
+    noAlt: () => [cursors[1], cursors[0] - 1]
   },
   ArrowDown: {
-    alt: {
-      shift: () => select(cursors[1], cursors[0] + 5),
-      noShift: () => move(cursors[0] + 5)
-    },
-    noAlt: {
-      shift: () => select(cursors[1], cursors[0] + 1),
-      noShift: () => move(cursors[0] + 1)
-    }
+    alt: () => [cursors[1], cursors[0] + 5],
+    noAlt: () => [cursors[1], cursors[0] + 1]
   }
 }
 
 const handleKeyDown = (e) => {
   if (e.code !== 'ArrowUp' && e.code !== 'ArrowDown') return
-  const selected =
-    keyMap[e.code][e.altKey ? 'alt' : 'noAlt'][
-      e.shiftKey ? 'shift' : 'noShift'
-    ]()
+  const shiftFunc = e.shiftKey ? select : move
+  const selected = shiftFunc(...keyMap[e.code][e.altKey ? 'alt' : 'noAlt']())
 
   list.forEach((item, i) => {
     item.classList.toggle('current', i === cursors[0])
