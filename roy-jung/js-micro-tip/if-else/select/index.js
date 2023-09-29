@@ -23,20 +23,16 @@ const move = (from, to) => {
 let cursors = [0, 0]
 
 const keyMap = {
-  ArrowUp: {
-    alt: () => [cursors[1], cursors[0] - 5],
-    noAlt: () => [cursors[1], cursors[0] - 1]
-  },
-  ArrowDown: {
-    alt: () => [cursors[1], cursors[0] + 5],
-    noAlt: () => [cursors[1], cursors[0] + 1]
-  }
+  ArrowUp: () => [cursors[1], cursors[0], -1],
+  ArrowDown: () => [cursors[1], cursors[0], +1]
 }
 
 const handleKeyDown = (e) => {
   if (e.code !== 'ArrowUp' && e.code !== 'ArrowDown') return
   const shiftFunc = e.shiftKey ? select : move
-  const selected = shiftFunc(...keyMap[e.code][e.altKey ? 'alt' : 'noAlt']())
+  const step = e.altKey ? 5 : 1
+  const [from, to, direction] = keyMap[e.code]()
+  const selected = shiftFunc(from, to + direction * step)
 
   list.forEach((item, i) => {
     item.classList.toggle('current', i === cursors[0])
