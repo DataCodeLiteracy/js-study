@@ -24,11 +24,10 @@ let cursors = [0, 0]
 
 const handleKeyDown = (e) => {
   if (e.code !== 'ArrowUp' && e.code !== 'ArrowDown') return
-  const shiftFunc = e.shiftKey ? select : move
+  const func = e.shiftKey ? select : move
   const step = e.altKey ? 5 : 1
   const direction = e.code === 'ArrowUp' ? -1 : +1
-  const [from, to] = [cursors[1], cursors[0]]
-  const selected = shiftFunc(from, to + direction * step)
+  const selected = func(cursors[1], cursors[0] + direction * step)
 
   list.forEach((item, i) => {
     item.classList.toggle('current', i === cursors[0])
