@@ -23,25 +23,26 @@ const move = (to) => {
 let cursors = [0, 0]
 
 const keyMap = {
-  SHIFT_ALT_UP: () => select(cursors[1], cursors[0] - 5),
-  NoSHIFT_ALT_UP: () => move(cursors[0] - 5),
+  // shift / alt / arrowUp(1)
+  _111: () => select(cursors[1], cursors[0] - 5),
+  _011: () => move(cursors[0] - 5),
 
-  SHIFT_NoALT_UP: () => select(cursors[1], cursors[0] - 1),
-  NoSHIFT_NoALT_UP: () => move(cursors[0] - 1),
+  _101: () => select(cursors[1], cursors[0] - 1),
+  _001: () => move(cursors[0] - 1),
 
-  SHIFT_ALT_DOWN: () => select(cursors[1], cursors[0] + 5),
-  NoSHIFT_ALT_DOWN: () => move(cursors[0] + 5),
+  _110: () => select(cursors[1], cursors[0] + 5),
+  _010: () => move(cursors[0] + 5),
 
-  SHIFT_NoALT_DOWN: () => select(cursors[1], cursors[0] + 1),
-  NoSHIFT_NoALT_DOWN: () => move(cursors[0] + 1)
+  _100: () => select(cursors[1], cursors[0] + 1),
+  _000: () => move(cursors[0] + 1)
 }
 
 const handleKeyDown = (e) => {
   if (e.code !== 'ArrowUp' && e.code !== 'ArrowDown') return
-  const shift = e.shiftKey ? 'SHIFT' : 'NoSHIFT'
-  const alt = e.altKey ? 'ALT' : 'NoALT'
-  const arrow = e.code === 'ArrowUp' ? 'UP' : 'DOWN'
-  const key = [shift, alt, arrow].join('_')
+  const shift = +e.shiftKey // 1 0
+  const alt = +e.altKey
+  const arrow = +(e.code === 'ArrowUp')
+  const key = '_' + [shift, alt, arrow].join('')
   const selected = keyMap[key]()
 
   list.forEach((item, i) => {
